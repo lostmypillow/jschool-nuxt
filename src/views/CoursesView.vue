@@ -1,6 +1,6 @@
 <script setup>
 import router from '@/router';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import SelectButton from 'primevue/selectbutton';
 import TieredMenu from 'primevue/tieredmenu';
 
@@ -11,75 +11,7 @@ const value = ref('未選擇');
 const selectedDep = ref('未選擇')
 const options = ref(['112下', '113上']);
 
-const items = ref([
-    {
-        label: 'File',
-        items: [
-            {
-                label: 'New',
-                icon: 'pi pi-plus',
-                items: [
-                    {
-                        label: 'Document',
-                        icon: 'pi pi-file'
-                    },
-                    {
-                        label: 'Image',
-                        icon: 'pi pi-image'
-                    },
-                    {
-                        label: 'Video',
-                        icon: 'pi pi-video'
-                    }
-                ]
-            },
-            {
-                label: 'Open',
-                icon: 'pi pi-folder-open'
-            },
-            {
-                label: 'Print',
-                icon: 'pi pi-print'
-            }
-        ]
-    },
-    {
-        label: 'Edit',
-        icon: 'pi pi-file-edit',
-        items: [
-            {
-                label: 'Copy',
-                icon: 'pi pi-copy'
-            },
-            {
-                label: 'Delete',
-                icon: 'pi pi-times'
-            }
-        ]
-    },
-    {
-        label: 'Search',
-        icon: 'pi pi-search'
-    },
-    {
-        separator: true
-    },
-    {
-        label: 'Share',
-        icon: 'pi pi-share-alt',
-        items: [
-            {
-                label: 'Slack',
-                icon: 'pi pi-slack'
-            },
-            {
-                label: 'Whatsapp',
-                icon: 'pi pi-whatsapp'
-            }
-        ]
-    }
-]);
-const departments = ref([
+const departments1 = ref([
   '教務處',
   '進修部',
   '體育室',
@@ -142,14 +74,17 @@ const departments = ref([
  
 ]);
 
-function trackChange() {
-  console.log("value changed")
-  title.value = value.value + " " + selectedDep.value + " 課表"
-  
-}
 
 
-const title = defineModel()
+watch([value, selectedDep], () => {
+    if (value.value === null ) {
+        value.value = "未選擇"
+    }
+    titleFromCourses.value = value.value + " " + selectedDep.value + " 課表"
+    
+})
+
+const titleFromCourses = defineModel()
 </script>
 
 
@@ -158,8 +93,8 @@ const title = defineModel()
     <h1 class="w-full flex items-center justify-center"></h1>
     <!-- <TieredMenu :model="items" /> -->
     <div class="flex flex-col items-center gap-3">
-      <SelectButton @change="trackChange" v-model="value" :options="options"/>
-      <SelectButton @change="trackChange" v-if="title != ''" v-model="selectedDep" :options="departments"/>
+      <SelectButton  v-model="value" :options="options"/>
+      <SelectButton v-if="titleFromCourses != ''" v-model="selectedDep" :options="departments1"/>
 
 
     </div>

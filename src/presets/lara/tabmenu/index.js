@@ -63,7 +63,7 @@ export default {
             {
                 'hover:bg-surface-0': state.d_activeIndex !== context.index,
                 'hover:border-surface-400': state.d_activeIndex !== context.index,
-                'hover:underline decoration-primary-500 decoration-solid decoration-4 underline-offset-2': state.d_activeIndex !== context.index
+                // 'hover:underline decoration-primary-500 decoration-solid decoration-4 underline-offset-2': state.d_activeIndex !== context.index
             },
 
             // Transitions
