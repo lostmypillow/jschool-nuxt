@@ -63,20 +63,19 @@ console.log(`current index value is ${index.value}`);
 </script>
 
 <template>
-  <header>
-    <div class="flex items-center justify-center bg-gray-200 p-4 h-10">
-      <h1 class="text-lg font-semibold">
-     {{ headerTitle }}
-      </h1>
-    </div>
+  <header class="my-4 mx-2">
+    
+    <h1 class="text-3xl font-extrabold w-full">
+      {{ headerTitle }}
+    </h1>
 
     <!-- Tab Menu -->
-    <div class="fixed bottom-0 w-full z-50 bg-white border-t border-gray-300">
+    <div class="fixed bottom-0 left-0 w-screen z-50 bg-white border-t border-gray-300">
       <TabMenu :model="items" :active-index="index" @tab-change=""/>
     </div>
 </header>
 
-<body class="flex w-screen h-full items-start justify-start p-4">
+<body class="flex  w-screen h-full items-start justify-start">
 
   <RouterView  v-model="titleFromCourses" />
 </body>   

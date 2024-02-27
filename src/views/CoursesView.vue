@@ -81,12 +81,12 @@ const departments1 = ref([
 
 const titleFromCourses = defineModel()
 const visible = ref(false)
-const BigTitle = ref(null)
+
 
 watch([value, selectedDep], () => {
 
   titleFromCourses.value = value.value + " " + selectedDep.value + " 課表"
-  const cheight =  BigTitle.value.clientHeight
+
 
   if (value.value === null || selectedDep.value === null) {
     value.value = "未選擇"
@@ -103,9 +103,6 @@ watch([value, selectedDep], () => {
 
 })
 
-function Testheight() {
-  console.log(BigTitle.value.clientHeight)
-}
 
 
 </script>
@@ -114,7 +111,7 @@ function Testheight() {
 <template>
 <!-- <div class="flex-col"> -->
     <div class="flex flex-row w-screen items-center justify-between gap-2">
-    <h1 ref="BigTitle" class="text-3xl font-extrabold grow">{{ titleFromCourses }}</h1>
+    <!-- <h1 ref="BigTitle" class="text-3xl font-extrabold grow">{{ titleFromCourses }}</h1> -->
     <Button class="w-content shrink-0" @click="visible=true">Filter</Button>
 
 
