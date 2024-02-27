@@ -112,7 +112,7 @@ function Testheight() {
 
 
 <template>
-<div class="flex-col">
+<!-- <div class="flex-col"> -->
     <div class="flex flex-row w-screen items-center justify-between gap-2">
     <h1 ref="BigTitle" class="text-3xl font-extrabold grow">{{ titleFromCourses }}</h1>
     <Button class="w-content shrink-0" @click="visible=true">Filter</Button>
@@ -154,8 +154,8 @@ function Testheight() {
 
     
   </div>
-  <Button @click="Testheight">test height</Button>
-</div>
+  <!-- <Button @click="Testheight">test height</Button>
+</div> -->
 </template>
 
 <style></style>
