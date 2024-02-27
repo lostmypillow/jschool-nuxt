@@ -1,10 +1,8 @@
 <script setup>
-import router from '@/router';
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import SelectButton from 'primevue/selectbutton';
-import TieredMenu from 'primevue/tieredmenu';
-
-
+import Sidebar from 'primevue/sidebar';
+import Button from 'primevue/button';
 
 
 const value = ref('未選擇');
@@ -36,72 +34,126 @@ const departments1 = ref([
   '土木系',
   '分子系',
   '防災所',
- '高分所',
- '環境所',
- '生化所',
- '化工所',
- '材料所',
- '資源所',
- '工程科技學士班',
- '能源光電外國學生專班',
- '工管系',
- '經管系',
- '管理所',
- '管理外國學生專班',
- '資財系',
- '工設系',
- '建築系',
- '建都所',
- '創新所',
- '創意設計學士班',
- '設計所',
- '互動系',
- '互動與創新外生專班',
- '技職所',
- '英文系',
- '科技法律學程',
- '智財所',
- '文發系',
- '電機系',
- '電子系',
- '資工系',
- '光電系',
- '電資學士班',
- '電資外國學生專班',
- '太空所',
- '創新學院'
+  '高分所',
+  '環境所',
+  '生化所',
+  '化工所',
+  '材料所',
+  '資源所',
+  '工程科技學士班',
+  '能源光電外國學生專班',
+  '工管系',
+  '經管系',
+  '管理所',
+  '管理外國學生專班',
+  '資財系',
+  '工設系',
+  '建築系',
+  '建都所',
+  '創新所',
+  '創意設計學士班',
+  '設計所',
+  '互動系',
+  '互動與創新外生專班',
+  '技職所',
+  '英文系',
+  '科技法律學程',
+  '智財所',
+  '文發系',
+  '電機系',
+  '電子系',
+  '資工系',
+  '光電系',
+  '電資學士班',
+  '電資外國學生專班',
+  '太空所',
+  '創新學院'
 
- 
+
 ]);
 
+const titleFromCourses = defineModel()
+const visible = ref(false)
+const BigTitle = ref(null)
 
+watch([value, selectedDep, BigTitle], () => {
+  titleFromCourses.value = value.value + " " + selectedDep.value + " 課表"
 
-watch([value, selectedDep], () => {
-    if (value.value === null ) {
-        value.value = "未選擇"
-    }
-    titleFromCourses.value = value.value + " " + selectedDep.value + " 課表"
+  
+  if (value.value === null || selectedDep.value === null) {
+    value.value = "未選擇"
+    selectedDep.value = "未選擇"
+  }
+  if (value.value != "未選擇" && selectedDep.value != "未選擇") {
+
+    visible.value = false
     
+  }
+
+  if (BigTitle.value.clientHeight > 20) {
+    console.log(`${BigTitle.value.clientHeight}`)
+  }
+
 })
 
-const titleFromCourses = defineModel()
+
+onMounted(
+  () => {
+    titleFromCourses.value = value.value + " " + selectedDep.value + " 課表"
+    
+  }
+)
+function Testheight() {
+  visible.value =  true
+  
+}
+
 </script>
 
 
 <template>
-  <div>
-    <h1 class="w-full flex items-center justify-center"></h1>
-    <!-- <TieredMenu :model="items" /> -->
-    <div class="flex flex-col items-center gap-3">
-      <SelectButton  v-model="value" :options="options"/>
-      <SelectButton v-if="titleFromCourses != ''" v-model="selectedDep" :options="departments1"/>
+  <div class="flex flex-row w-screen items-center justify-between gap-2">
+    <h1 ref="BigTitle" class="text-3xl font-extrabold grow">{{ titleFromCourses }} </h1>
+    <Button class="w-content shrink-0" @click="Testheight">Filter</Button>
 
 
-    </div>
+    <Sidebar v-model:visible="visible" position="right">
+
+      <template #container>
+        <div class="flex flex-col gap-5 h-full m-4">
+
+
+          <!-- <Button class="flex" @click="closeCallback">Close</Button> -->
+          <div class="flex flex-col gap-2 overflow-auto">
+            <div>
+
+              <label for="selectYear">Select Year:</label>
+              <SelectButton id="selectYear" v-model="value" :options="options" />
+            </div>
+
+            <div>
+              <label for="selectDep">Select Department:</label>
+              <SelectButton id="selectDep" v-if="value != '未選擇'" v-model="selectedDep" :options="departments1" />
+
+            </div>
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+
+      </template>
+
+    </Sidebar>
+
     
   </div>
+
 </template>
 
-<style>
-
-</style>
+<style></style>

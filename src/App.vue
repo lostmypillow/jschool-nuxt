@@ -9,6 +9,12 @@ const route = useRoute();
 
 const title = computed(() => route.name)
 
+const isTabChanged = ref(false)
+
+function tabChange() {
+  isTabChanged.value = true
+}
+
 const items = ref([
   {
     label: '課表', route: '/schedule', command: () => {
@@ -39,15 +45,14 @@ const items = ref([
 
 const index = ref(0)
 const headerTitle = ref("")
-const titleFromCourses =ref("")
-watch([title, titleFromCourses], (newtitle) => {
-  // console.log(`current title is ${title.value}`)
-  // console.log(`current index value is ${index.value}`)
-   if (titleFromCourses.value === "") {
+const titleFromCourses = ref("")
+watch([title, titleFromCourses], () => {
+   if (title.value === "課程"  && titleFromCourses.value != "") {
    
-    headerTitle.value = title.value
+    headerTitle.value = titleFromCourses.value
+
    } else {
-     headerTitle.value = titleFromCourses.value
+     headerTitle.value = title.value
    }
  
 index.value = items.value.findIndex((item) => item.label === title.value)
@@ -67,11 +72,17 @@ console.log(`current index value is ${index.value}`);
 
     <!-- Tab Menu -->
     <div class="fixed bottom-0 w-full z-50 bg-white border-t border-gray-300">
-      <TabMenu :model="items" :active-index="index" />
+      <TabMenu :model="items" :active-index="index" @tab-change=""/>
     </div>
 </header>
 
-<RouterView v-model="titleFromCourses" /></template>
+<body class="flex w-screen h-full items-start justify-start p-4">
+
+  <RouterView  v-model="titleFromCourses" />
+</body>   
+</template>
+
+
 
 <style scoped>
 *,
