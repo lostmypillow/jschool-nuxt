@@ -4,6 +4,13 @@ import SelectButton from 'primevue/selectbutton';
 import Sidebar from 'primevue/sidebar';
 import Button from 'primevue/button';
 
+onMounted(
+  () => {
+    titleFromCourses.value = value.value + " " + selectedDep.value + " 課表"
+    
+    
+  }
+)
 
 const value = ref('未選擇');
 const selectedDep = ref('未選擇')
@@ -76,45 +83,39 @@ const titleFromCourses = defineModel()
 const visible = ref(false)
 const BigTitle = ref(null)
 
-watch([value, selectedDep, BigTitle], () => {
-  titleFromCourses.value = value.value + " " + selectedDep.value + " 課表"
+watch([value, selectedDep], () => {
 
-  
+  titleFromCourses.value = value.value + " " + selectedDep.value + " 課表"
+  const cheight =  BigTitle.value.clientHeight
+
   if (value.value === null || selectedDep.value === null) {
     value.value = "未選擇"
     selectedDep.value = "未選擇"
-  }
-  if (value.value != "未選擇" && selectedDep.value != "未選擇") {
+  } else if (value.value != "未選擇" && selectedDep.value != "未選擇") {
 
     visible.value = false
     
+    
   }
 
-  if (BigTitle.value.clientHeight > 20) {
-    console.log(`${BigTitle.value.clientHeight}`)
-  }
+
+  
 
 })
 
-
-onMounted(
-  () => {
-    titleFromCourses.value = value.value + " " + selectedDep.value + " 課表"
-    
-  }
-)
 function Testheight() {
-  visible.value =  true
-  
+  console.log(BigTitle.value.clientHeight)
 }
+
 
 </script>
 
 
 <template>
-  <div class="flex flex-row w-screen items-center justify-between gap-2">
-    <h1 ref="BigTitle" class="text-3xl font-extrabold grow">{{ titleFromCourses }} </h1>
-    <Button class="w-content shrink-0" @click="Testheight">Filter</Button>
+<div class="flex-col">
+    <div class="flex flex-row w-screen items-center justify-between gap-2">
+    <h1 ref="BigTitle" class="text-3xl font-extrabold grow">{{ titleFromCourses }}</h1>
+    <Button class="w-content shrink-0" @click="visible=true">Filter</Button>
 
 
     <Sidebar v-model:visible="visible" position="right">
@@ -153,7 +154,8 @@ function Testheight() {
 
     
   </div>
-
+  <Button @click="Testheight">test height</Button>
+</div>
 </template>
 
 <style></style>
