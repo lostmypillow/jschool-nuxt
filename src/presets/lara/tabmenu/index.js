@@ -18,14 +18,14 @@ export default {
         ]
     },
     menuitem: {
-        class: 'flex basis-1/4 justify-center items-center grow-1'
+        class: 'flex flex-col basis-1/4 justify-center items-center grow-1'
     },
     inkbar: {
         class: 'hidden'
     },
     label: {
         class: [
-            'text-xs md:text-s'
+            'flex font-bold text-s md:text-base'
         ]
     },
     action: ({ context, state }) => ({
@@ -33,10 +33,10 @@ export default {
             'relative',
 
             // Font
-            'font-bold',
+            'font-extrabold',
 
             // Flexbox and Alignment
-            'flex items-center',
+            'flex flex-col items-center',
 
             // Spacing
             'p-2',
@@ -76,6 +76,6 @@ export default {
         ]
     }),
     icon: {
-        class: 'mr-2'
+        class: 'flex mr-2'
     }
 };

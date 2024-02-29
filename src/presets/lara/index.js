@@ -55,7 +55,7 @@ import dropdown from './dropdown';
 // import rating from './rating';
 // import ripple from './ripple';
 // import scrollpanel from './scrollpanel';
-// import scrolltop from './scrolltop';
+import scrolltop from './scrolltop';
 import selectbutton from './selectbutton';
 import sidebar from './sidebar';
 // import skeleton from './skeleton';
@@ -177,7 +177,7 @@ export default {
     // chip,
     // progressbar,
     // skeleton,
-    // scrolltop,
+   scrolltop,
     // terminal,
     // blockui
 };

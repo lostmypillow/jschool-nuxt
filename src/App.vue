@@ -1,45 +1,56 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import TabMenu from 'primevue/tabmenu';
 import Dropdown from 'primevue/dropdown';
 import { ref, watch, computed, onMounted } from 'vue';
 import router from './router';
 import { useRoute } from 'vue-router';
-import AutoComplete from 'primevue/autocomplete';
+// import ScrollTop from 'primevue/scrolltop';
+import BottomNav from './components/ui/BottomNav.vue';
+import TopNav from './components/ui/TopNav.vue'
+import NavHeader from './components/ui/NavHeader.vue'
+import SelectionBar from './components/ui/SelectionBar.vue'
+import SVG from './components/icons/SVG.vue';
+
+
 
 const route = useRoute();
 
 const title = computed(() => route.name)
 
-const isTabChanged = ref(false)
-
-function tabChange() {
-  isTabChanged.value = true
-}
-
 const items = ref([
   {
-    label: '課表', route: '/schedule', command: () => {
+    label: '課表',
+    route: '/schedule',
+    command: () => {
       router.push('/schedule')
     }
   },
   {
-    label: '課程', route: '/courses', command: () => {
+    label: '課程',
+    route: '/courses',
+    command: () => {
       router.push('/courses')
     }
   },
   {
-    label: '點名', route: '/rollcall', command: () => {
+    label: '點名',
+    route: '/rollcall',
+    command: () => {
       router.push('/rollcall')
     }
   },
   {
-    label: '成績', route: '/scores', command: () => {
+    label: '成績',
+    route: '/scores',
+    command: () => {
       router.push('/scores')
     }
   },
   {
-    label: '服務', route: '/services', command: () => {
+    label: '服務',
+    route: '/services',
+    command: () => {
       router.push('/services')
     }
   },
@@ -49,137 +60,177 @@ const index = ref(0)
 const headerTitle = ref("")
 const titleFromCourses = ref("")
 watch([title, titleFromCourses], () => {
-   if (title.value === "課程"  && titleFromCourses.value != "") {
-   
-    headerTitle.value = titleFromCourses.value
 
-   } else {
-     headerTitle.value = title.value
-   }
- 
-index.value = items.value.findIndex((item) => item.label === title.value)
-console.log(`current index value is ${index.value}`);
+  headerTitle.value = title.value
+  index.value = items.value.findIndex((item) => item.label === title.value)
 })
-const selectedYear =ref("")
+
+const selectedYear = ref("")
 const selectedDep = ref("")
-
-
 const years = ref([
   { name: "112上", id: 20232 },
-  { name: "113上", id: 20241}
-  ])
+  { name: "113上", id: 20241 }
+])
+const departments = ref([
+  {
+    label: '',
+    items: [
+      { label: '教務處' },
+      { label: '進修部' },
+      { label: '體育室' },
+      { label: '通識中心' },
+      { label: '師資培育中心' },
+      { label: '校院級課程' },
+    ]
+  },
+  {
+    label: '機電學院',
+    items: [
+      { label: '智動科' },
+      { label: '機械系' },
+      { label: '機電所' },
+      { label: '車輛系' },
+      { label: '能源冷凍空調系' },
+      { label: '製科所' },
+      { label: '自動化所' },
+      { label: '機電科所' },
+      { label: '機電學士班' },
+      { label: '機電科技博士外生專班' },
+      { label: '機械自動化外生專班' },
+      { label: '能源與車輛外生專班' },
+      { label: '機電學院' }
+    ]
+  },
+  {
+    label: "工程學院",
+    items: [
+      { "label": "化工系" },
+      { "label": "材資系" },
+      { "label": "土木系" },
+      { "label": "分子系" },
+      { "label": "防災所" },
+      { "label": "高分所" },
+      { "label": "環境所" },
+      { "label": "生化所" },
+      { "label": "化工所" },
+      { "label": "材料所" },
+      { "label": "資源所" },
+      { "label": "工程科技學士班" },
+      { "label": "能源光電外國學生專班" }
+    ]
+  },
+  {
+    label: "管理學院",
+    items: [
+      { "label": "工管系" },
+      { "label": "經管系" },
+      { "label": "管理所" },
+      { "label": "管理外國學生專班" },
+      { "label": "資財系" },
+      { "label": "管理學院" },
 
-const departments1 = ref([
-  '教務處',
-  '進修部',
-  '體育室',
-  '通識中心',
-  '師資培育中心',
-  '校院級課程',
-  '智動科',
-  '機械系',
-  '機電所',
-  '車輛系',
-  '能源冷凍空調系',
-  '製科所',
-  '自動化所',
-  '機電科所',
-  '機電學士班',
-  '機電科技博士外生專班',
-  '機械自動化外生專班',
-  '能源與車輛外生專班',
-  '機電學院',
-  '化工系',
-  '材資系',
-  '土木系',
-  '分子系',
-  '防災所',
-  '高分所',
-  '環境所',
-  '生化所',
-  '化工所',
-  '材料所',
-  '資源所',
-  '工程科技學士班',
-  '能源光電外國學生專班',
-  '工管系',
-  '經管系',
-  '管理所',
-  '管理外國學生專班',
-  '資財系',
-  '工設系',
-  '建築系',
-  '建都所',
-  '創新所',
-  '創意設計學士班',
-  '設計所',
-  '互動系',
-  '互動與創新外生專班',
-  '技職所',
-  '英文系',
-  '科技法律學程',
-  '智財所',
-  '文發系',
-  '電機系',
-  '電子系',
-  '資工系',
-  '光電系',
-  '電資學士班',
-  '電資外國學生專班',
-  '太空所',
-  '創新學院'
+    ]
+  },
+  {
+    label: "設計學院",
+    items: [
+      { "label": "工設系" },
+      { "label": "建築系" },
+      { "label": "建都所" },
+      { "label": "創新所" },
+      { "label": "創意設計學士班" },
+      { "label": "設計所" },
+      { "label": "互動系" },
+      { "label": "互動與創新外生專班" },
+
+    ]
+  },
+  {
+    label: "人文與社會科學學院 ",
+    items: [
+      { "label": "技職所" },
+      { "label": "英文系" },
+      { "label": "科技法律學程" },
+      { "label": "智財所" },
+      { "label": "文發系" },
+
+    ]
+  },
+  {
+    label: "電資學院 ",
+    items: [
+      { "label": "電機系" },
+      { "label": "電子系" },
+      { "label": "資工系" },
+      { "label": "光電系" },
+      { "label": "電資學士班" },
+      { "label": "電資外國學生專班" },
+      { "label": "太空所" },
+
+    ]
+  },
+  {
+    label: "創新前瞻科技研究學院 ",
+    items: [{ "label": "創新學院" }]
+  },
+])
+
+onMounted(() => {
+  headerTitle.value = title.value
+})
 
 
-]);
-const suggestions = ref([])
-const searchterm = ref("")
-const search = (event) => {
-if (departments1.includes(event.query)) {
-  suggestions = departments1.value
-} else {
-  console.log("None found")
-}
-}
 </script>
 
 <template>
-  <header class="">
+  <header>
+    <TopNav>
 
-   <div class="top-0 p-2 w-screen bg-red-300 grid grid-rows-3">
+      <NavHeader>{{ headerTitle }}</NavHeader>
 
-    <div id="title" class="m-2">
-      <h1 class="text-3xl font-extrabold w-full">
-      {{ headerTitle }}
-    </h1> 
-    </div>
+<SelectionBar v-if="title == '課程'">
+  <Dropdown 
+        v-model="selectedYear"
+        :options="years"
+        optionLabel="name"
+        placeholder="選擇學年"></Dropdown>
 
-    <div id="selection" class="m-2">
-<Dropdown v-model:="selectedYear" :options="years" optionLabel="name" placeholder="選擇學年"></Dropdown>
-<Dropdown v-model:="selectedDep" :options="departments1" placeholder="選擇科系"></Dropdown>
-    </div>
-    <div if="search" class="m-2">
-<AutoComplete v-model="searchterm" :suggestions="suggestions" @complete="search" forceSelection></AutoComplete>
+        <Dropdown 
+        v-model="selectedDep" 
+        :options="departments" 
+        optionLabel="label"
+        optionGroupLabel="label"
+        optionGroupChildren="items" 
+        placeholder="選擇科系"
+        filter></Dropdown>
+</SelectionBar>
+    </TopNav>
 
-    </div>
-   </div> 
+
+  </header>
+
+  <body>
+
+    <router-view class="flex items-center justify-center p-5" v-slot="{ Component }">
+      <!-- <transition> -->
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+      <!-- </transition> -->
+    </router-view>
 
 
-    <!-- -->
-<!-- top p-2 (0.5rem) +  -->
-    <!-- Tab Menu -->
-   
-</header>
+    <BottomNav>
+      <TabMenu v-if="title != '大廳'" :model="items" :active-index="index">
+        <template #itemicon="{ item }">
+          <SVG :typeee="item.route"></SVG>
+        </template>
+      </TabMenu>
+    </BottomNav>
 
-<body class="flex  w-screen h-content items-start justify-start">
-
-  <RouterView  v-model="titleFromCourses" />
-  <div class="fixed bottom-0 left-0 w-screen z-50 bg-white border-t border-gray-300">
-      <TabMenu :model="items" :active-index="index" @tab-change=""/>
-      </div>
-</body>   
+  </body>
+  <ScrollTop />
 </template>
-
-
 
 <style scoped>
 *,

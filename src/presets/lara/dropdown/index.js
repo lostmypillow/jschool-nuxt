@@ -9,16 +9,16 @@ export default {
             'rounded-md',
 
             // Color and Background
-            'bg-surface-0 dark:bg-surface-900',
-            'border border-surface-300 dark:border-surface-700',
+            'bg-surface-0',
+            'border border-surface-300',
 
             // Transitions
             'transition-all',
             'duration-200',
 
             // States
-            'hover:border-primary-500 dark:hover:border-primary-300',
-            { 'outline-none outline-offset-0 ring ring-primary-400/50 dark:ring-primary-300/50': state.focused },
+            'hover:border-primary-500 ',
+            { 'outline-none outline-offset-0 ring ring-primary-400/50': state.focused },
 
             // Misc
             'cursor-pointer',
@@ -29,7 +29,6 @@ export default {
     input: ({ props }) => ({
         class: [
             //Font
-            'font-sans',
             'leading-none',
 
             // Display
@@ -39,8 +38,8 @@ export default {
             // Color and Background
             'bg-transparent',
             'border-0',
-            { 'text-surface-800 dark:text-white/80': props.modelValue != undefined, 'text-surface-400 dark:text-surface-500': props.modelValue == undefined },
-            'placeholder:text-surface-400 dark:placeholder:text-surface-500',
+            { 'text-surface-800': props.modelValue != undefined, 'text-surface-400 ': props.modelValue == undefined },
+            'placeholder:text-surface-400 ',
 
             // Sizing and Spacing
             'w-[1%]',
@@ -89,20 +88,19 @@ export default {
             'absolute top-0 left-0',
 
             // Shape
-            'border-0 dark:border',
+            'border-0 ',
             'rounded-md',
             'shadow-md',
 
             // Color
-            'bg-surface-0 dark:bg-surface-800',
-            'text-surface-800 dark:text-white/80',
-            'dark:border-surface-700'
+            'bg-surface-0',
+            'text-surface-800'
         ]
     },
     wrapper: {
         class: [
             // Sizing
-            'max-h-[200px]',
+            'max-h-[300px]',
 
             // Misc
             'overflow-auto'
@@ -129,16 +127,16 @@ export default {
             'py-3 px-5',
 
             // Color
-            { 'text-surface-700 dark:text-white/80': !context.focused && !context.selected && !context.disabled },
-            { 'text-surface-600 dark:text-white/70': !context.focused && !context.selected && context.disabled },
-            { 'bg-surface-200 dark:bg-surface-600/60 text-surface-700 dark:text-white/80': context.focused && !context.selected },
-            { 'bg-primary-100 dark:bg-primary-400/40 text-primary-700 dark:text-white/80': context.focused && context.selected },
-            { 'bg-primary-50 dark:bg-primary-400/40 text-primary-700 dark:text-white/80': !context.focused && context.selected },
+            { 'text-surface-700': !context.focused && !context.selected && !context.disabled },
+            { 'text-surface-600 ': !context.focused && !context.selected && context.disabled },
+            { 'bg-surface-200 text-surface-700': context.focused && !context.selected },
+            { 'bg-primary-100 text-primary-700': context.focused && context.selected },
+            { 'bg-primary-50  text-primary-700': !context.focused && context.selected },
 
             //States
-            { 'hover:bg-surface-100 dark:hover:bg-surface-600/80': !context.focused && !context.selected },
-            { 'hover:text-surface-700 hover:bg-surface-100 dark:hover:text-white dark:hover:bg-surface-600/80': context.focused && !context.selected },
-            'focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:ring focus-visible:ring-inset focus-visible:ring-primary-400/50 dark:focus-visible:ring-primary-300/50',
+            { 'hover:bg-surface-100 ': !context.focused && !context.selected },
+            { 'hover:text-surface-700 hover:bg-surface-100': context.focused && !context.selected },
+            'focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:ring focus-visible:ring-inset focus-visible:ring-primary-400/50',
 
             // Transitions
             'transition-shadow',
@@ -153,19 +151,29 @@ export default {
     }),
     itemgroup: {
         class: [
-            //Font
-            'font-bold',
+            
 
             // Spacing
             'm-0',
             'py-3 px-5',
 
             // Color
-            'text-surface-800 dark:text-white/80',
-            'bg-surface-0 dark:bg-surface-600/80',
+            'text-surface-800 ',
+            'bg-surface-0',
 
             // Misc
             'cursor-auto'
+        ]
+    },
+    itemGroupLabel: {
+        class: [
+            'font-extrabold',
+            'text-xl'
+        ]
+    },
+    itemLabel: {
+        class: [
+'overflow-hidden'
         ]
     },
     emptymessage: {
@@ -177,7 +185,7 @@ export default {
             'py-3 px-5',
 
             // Color
-            'text-surface-800 dark:text-white/80',
+            'text-surface-800',
             'bg-transparent'
         ]
     },
@@ -193,9 +201,9 @@ export default {
             'rounded-tr-md',
 
             // Color
-            'text-surface-700 dark:text-white/80',
-            'bg-surface-100 dark:bg-surface-800',
-            'border-surface-300 dark:border-surface-700'
+            'text-surface-700 ',
+            'bg-surface-100 ',
+            'border-surface-300 '
         ]
     },
     filtercontainer: {
@@ -213,9 +221,9 @@ export default {
             'w-full',
 
             //Color
-            'text-surface-700 dark:text-white/80',
-            'bg-surface-0 dark:bg-surface-900',
-            'border-surface-200 dark:border-surface-700',
+            'text-surface-700 ',
+            'bg-surface-0 ',
+            'border-surface-200 ',
 
             // Shape
             'border',
@@ -227,9 +235,9 @@ export default {
             'duration-200',
 
             // States
-            'hover:border-primary-500 dark:hover:border-primary-300',
+            'hover:border-primary-500 ',
             'focus:ring focus:outline-none focus:outline-offset-0',
-            'focus:ring-primary-400/50 dark:focus:ring-primary-300/50',
+            'focus:ring-primary-400/50 ',
 
             // Misc
             'appearance-none'

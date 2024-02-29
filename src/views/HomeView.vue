@@ -1,12 +1,14 @@
 <script setup>
-import TabView from 'primevue/tabview';
 import router from '@/router';
+import Button from 'primevue/button';
 
-
+function login() {
+  router.push('/schedule')
+}
 </script>
 <template>
-  <main>
+  <div class="flex flex-col items-center justify-center">
     <h1>I am home View</h1>
-    <router-link to="/schedule">Login</router-link>
-  </main>
+    <Button @click="login">LOGIN</Button>
+  </div>
 </template>
