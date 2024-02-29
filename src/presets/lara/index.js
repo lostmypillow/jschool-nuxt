@@ -1,5 +1,5 @@
 // import accordion from './accordion';
-// import autocomplete from './autocomplete';
+ import autocomplete from './autocomplete';
 // import avatar from './avatar';
 // import avatargroup from './avatargroup';
 // import badge from './badge';
@@ -23,7 +23,7 @@ import button from './button';
 // import dialog from './dialog';
 // import divider from './divider';
 // import dock from './dock';
-// import dropdown from './dropdown';
+import dropdown from './dropdown';
 // import fieldset from './fieldset';
 // import galleria from './galleria';
 // import global from './global';
@@ -88,8 +88,8 @@ export default {
     // },
 
     // //forms
-    // autocomplete,
-    // dropdown,
+     autocomplete,
+     dropdown,
     // inputnumber,
     // inputtext,
     // calendar,
