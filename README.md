@@ -8,7 +8,7 @@ TTYL is a Vue Single Page Application (SPA) that aims to be a proof of concept f
 
 ## Why is TTYL?
 
-otherwise known as [NPortal](https://nportal.ntut.edu.tw), the unofficial companion app made by NTUT Programming Club, [TAT]([https://apps.apple.com/tw/app/tat-北科生活/id1513875597])  , Zuvio, Google Classroom, Google Forms, Microsoft Teams, Microsoft Forms, and LINE group chats.
+
 ###### Note: The heading is a reference to a certain scene in a certain Marvel movie, the grammatical mistake made here is intentional
 
 
