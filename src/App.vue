@@ -1,24 +1,26 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import TabMenu from 'primevue/tabmenu';
-import Dropdown from 'primevue/dropdown';
 import { ref, watch, computed, onMounted } from 'vue';
 import router from './router';
 import { useRoute } from 'vue-router';
+  
+import TabMenu from 'primevue/tabmenu';
+import Dropdown from 'primevue/dropdown';
 // import ScrollTop from 'primevue/scrolltop';
 import BottomNav from './components/ui/BottomNav.vue';
 import TopNav from './components/ui/TopNav.vue'
 import NavHeader from './components/ui/NavHeader.vue'
 import SelectionBar from './components/ui/SelectionBar.vue'
 import SVG from './components/icons/SVG.vue';
+// import Toolbar from 'primevue/toolbar';
 
 
 
 const route = useRoute();
 
-const title = computed(() => route.name)
+const routeName = computed(() => route.name)
 
-const items = ref([
+const bottomNavItems = ref([
   {
     label: '課表',
     route: '/schedule',
@@ -58,19 +60,40 @@ const items = ref([
 
 const index = ref(0)
 const headerTitle = ref("")
+const selectedYear = ref("")
+const selectedDep = ref("")
 const titleFromCourses = ref("")
-watch([title, titleFromCourses], () => {
+
+  
+const yearInvalidState = ref(false)
+const depDisabledState = ref(true)
+  
+watch([title, titleFromCourses, selectedYear, selectedDep], () => {
 
   headerTitle.value = title.value
   index.value = items.value.findIndex((item) => item.label === title.value)
+
+  
+  if (selectedYear.value != "" && selectedDep != "") {
+    sideBarVisibility.value = false
+  };
+  
 })
 
-const selectedYear = ref("")
-const selectedDep = ref("")
-const years = ref([
-  { name: "112上", id: 20232 },
-  { name: "113上", id: 20241 }
+
+  
+
+const courseYears = ref([
+  { 
+    label: "112上",
+    id: 20232 
+  },
+  { 
+    label:"113上",
+    id: 20241
+  }
 ])
+  
 const departments = ref([
   {
     label: '',
@@ -174,7 +197,7 @@ const departments = ref([
     items: [{ "label": "創新學院" }]
   },
 ])
-
+const sideBarVisibility = ref(false)
 onMounted(() => {
   headerTitle.value = title.value
 })
@@ -182,18 +205,36 @@ onMounted(() => {
 
 </script>
 
-<template>
-  <header>
+
+<header>
     <TopNav>
 
       <NavHeader>{{ headerTitle }}</NavHeader>
 
-<SelectionBar v-if="title == '課程'">
+
+//     <Toolbar class="">
+// <template #start>  
+//           </template>
+
+ //           <template #center>
+//{{ headerTitle }}
+ //           </template>
+
+  //          <template #end> 
+  //         <Button @click="sideBarVisibility = true">Filter</Button>
+  //          </template>
+ //       </Toolbar>
+ 
+
+      
+  // <Sidebar  :visible="sideBarVisibility">  
+<SelectionBar v-if="routeName == '課程'">
   <Dropdown 
         v-model="selectedYear"
-        :options="years"
-        optionLabel="name"
-        placeholder="選擇學年"></Dropdown>
+        :options="courseYears"
+        optionLabel="label"
+        placeholder="選擇學年"
+    :invalid="yearInvalidState" ></Dropdown>
 
         <Dropdown 
         v-model="selectedDep" 
@@ -202,12 +243,25 @@ onMounted(() => {
         optionGroupLabel="label"
         optionGroupChildren="items" 
         placeholder="選擇科系"
-        filter></Dropdown>
+         :disabled="depDisabledState" ></Dropdown>
 </SelectionBar>
+//</Sidebar>
+
+      
     </TopNav>
 
 
   </header>
+
+
+
+
+
+
+
+
+
+
 
   <body>
 
@@ -221,7 +275,7 @@ onMounted(() => {
 
 
     <BottomNav>
-      <TabMenu v-if="title != '大廳'" :model="items" :active-index="index">
+      <TabMenu v-if="routeName != '大廳'" :model="bottomNavItems" :active-index="index">
         <template #itemicon="{ item }">
           <SVG :typeee="item.route"></SVG>
         </template>
