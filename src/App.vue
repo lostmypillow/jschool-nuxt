@@ -6,13 +6,13 @@ import { useRoute } from 'vue-router';
   
 import TabMenu from 'primevue/tabmenu';
 import Dropdown from 'primevue/dropdown';
-// import ScrollTop from 'primevue/scrolltop';
+ import ScrollTop from 'primevue/scrolltop';
 import BottomNav from './components/ui/BottomNav.vue';
 import TopNav from './components/ui/TopNav.vue'
 import NavHeader from './components/ui/NavHeader.vue'
 import SelectionBar from './components/ui/SelectionBar.vue'
 import SVG from './components/icons/SVG.vue';
-// import Toolbar from 'primevue/toolbar';
+//  import Toolbar from 'primevue/toolbar';
 
 
 
@@ -68,10 +68,10 @@ const titleFromCourses = ref("")
 const yearInvalidState = ref(false)
 const depDisabledState = ref(true)
   
-watch([title, titleFromCourses, selectedYear, selectedDep], () => {
+watch([routeName, titleFromCourses, selectedYear, selectedDep], () => {
 
-  headerTitle.value = title.value
-  index.value = items.value.findIndex((item) => item.label === title.value)
+  headerTitle.value = routeName.value
+  index.value = bottomNavItems.value.findIndex((item) => item.label === title.value)
 
   
   if (selectedYear.value != "" && selectedDep != "") {
@@ -85,7 +85,7 @@ watch([title, titleFromCourses, selectedYear, selectedDep], () => {
 
 const courseYears = ref([
   { 
-    label: "112上",
+    label: "112下",
     id: 20232 
   },
   { 
@@ -205,29 +205,30 @@ onMounted(() => {
 
 </script>
 
-
+<template>
 <header>
+  
     <TopNav>
 
       <NavHeader>{{ headerTitle }}</NavHeader>
 
 
-//     <Toolbar class="">
-// <template #start>  
-//           </template>
+     <!-- <Toolbar class="">
+ <template #start>  
+           </template>
 
- //           <template #center>
-//{{ headerTitle }}
- //           </template>
+           <template #center>
+{{ headerTitle }}
+           </template>
 
-  //          <template #end> 
-  //         <Button @click="sideBarVisibility = true">Filter</Button>
-  //          </template>
- //       </Toolbar>
+            <template #end> 
+           <Button @click="sideBarVisibility = true">Filter</Button>
+            </template>
+        </Toolbar> -->
  
 
       
-  // <Sidebar  :visible="sideBarVisibility">  
+ <Sidebar  :visible="sideBarVisibility">  
 <SelectionBar v-if="routeName == '課程'">
   <Dropdown 
         v-model="selectedYear"
@@ -245,7 +246,7 @@ onMounted(() => {
         placeholder="選擇科系"
          :disabled="depDisabledState" ></Dropdown>
 </SelectionBar>
-//</Sidebar>
+</Sidebar>
 
       
     </TopNav>
