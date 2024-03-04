@@ -66,7 +66,7 @@ const titleFromCourses = ref("")
 
 
 const yearInvalidState = ref(false)
-const depDisabledState = ref(true)
+const depDisabledState = ref(false)
 
 watch([routeName, titleFromCourses, selectedYear, selectedDep], () => {
 
@@ -246,6 +246,22 @@ const departments = ref([
       }]
   },
 ])
+
+const depYears = ref([
+  {
+    label: "一年級"
+  },
+  {
+    label: "二年級"
+  },
+  {
+    label: "三年級"
+  },
+  {
+    label: "四年級"
+  }
+])
+
 const sideBarVisibility = ref(false)
 onMounted(() => {
   headerTitle.value = title.value
@@ -256,8 +272,8 @@ onMounted(() => {
 
 <template>
   <header>
-
-    <TopNav>
+<!-- 
+    <TopNav> -->
 
       <NavHeader>{{ headerTitle }}</NavHeader>
 
@@ -277,7 +293,7 @@ onMounted(() => {
 
 
 
-      <Sidebar :visible="sideBarVisibility">
+      <!-- <Sidebar :visible="sideBarVisibility">
         <SelectionBar v-if="routeName == '課程'">
           <Dropdown v-model="selectedYear" :options="courseYears" optionLabel=label placeholder="選擇學年"
             :invalid="yearInvalidState"></Dropdown>
@@ -285,10 +301,10 @@ onMounted(() => {
           <Dropdown v-model="selectedDep" :options="departments" optionLabel=label optionGroupLabel=label
             optionGroupChildren="items" placeholder="選擇科系" :disabled="depDisabledState"></Dropdown>
         </SelectionBar>
-      </Sidebar>
+      </Sidebar> -->
 
-
-    </TopNav>
+<!-- 
+    </TopNav> -->
 
 
   </header>
@@ -305,7 +321,7 @@ onMounted(() => {
 
   <body>
 
-    <router-view class="flex items-center justify-center p-5" v-slot="{ Component }">
+    <router-view class="flex items-center justify-center m-4 p-5" v-slot="{ Component }">
       <!-- <transition> -->
       <keep-alive>
         <component :is="Component" />
@@ -321,9 +337,9 @@ onMounted(() => {
         </template>
       </TabMenu>
     </BottomNav>
-
+    <ScrollTop />
   </body>
-  <ScrollTop />
+ 
 </template>
 
 <style scoped>

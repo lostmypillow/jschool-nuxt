@@ -44,7 +44,7 @@ import dropdown from './dropdown';
 // import multiselect from './multiselect';
 // import orderlist from './orderlist';
 // import organizationchart from './organizationchart';
-// import overlaypanel from './overlaypanel';
+import overlaypanel from './overlaypanel';
 // import paginator from './paginator';
 // import panel from './panel';
 // import panelmenu from './panelmenu';
@@ -155,7 +155,7 @@ export default {
 
     // //overlays
     // dialog,
-    // overlaypanel,
+overlaypanel,
     sidebar,
     // confirmpopup,
 
