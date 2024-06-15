@@ -1,15 +1,8 @@
-# TTYL
-[Demo Website](https://ttyl.vercel.app)
-
-## Who’s TTYL?
-
-TTYL is a Vue Single Page Application (SPA) that aims to be a proof of concept for a well designed, well thought out responsive student portal site for Taipei Tech.
+# JSchool Vue
+JSchool Vue is a Vue Single Page Application (SPA) that aims to be a proof of concept for a well designed, well thought out responsive student portal site for Taipei Tech.
 
 
-## Why is TTYL?
-
-
-###### Note: The heading is a reference to a certain scene in a certain Marvel movie, the grammatical mistake made here is intentional
+## Why?
 
 
 ## Recreating This Project
