@@ -1,4 +1,5 @@
 # JSchool Vue
+(Unmaintained, pending update)
 JSchool Vue is a Vue Single Page Application (SPA) that aims to be a proof of concept for a well designed, well thought out responsive student portal site for Taipei Tech.
 
 
